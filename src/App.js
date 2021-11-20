@@ -6,6 +6,7 @@ import React from "react";
 import StateHook from "./components/StateHook";
 import CounterHook from "./components/CounterHook";
 import FetchData from "./components/FetchData";
+import UseReducer from "./components/UseReducer";
 
 export const MyContext = React.createContext()
 
@@ -19,7 +20,8 @@ function App() {
         {/*</MyContext.Provider>*/}
         {/*<StateHook />*/}
         {/*<CounterHook />*/}
-        <FetchData/>
+        {/*<FetchData/>*/}
+        <UseReducer />
     </div>
   );
 }
