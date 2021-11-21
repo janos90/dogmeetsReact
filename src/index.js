@@ -3,23 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css'
-import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Form from "./components/Form";
-import Hello from "./components/Hello";
-
-function Router() {
-    return(
-        <BrowserRouter>
-            <Routes>
-                <Route exact path="/" element={<App/>}/>
-                <Route exact path='/login' element={<Form/>}/>
-            </Routes>
-        </BrowserRouter>
-    )
-}
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 ReactDOM.render(
   <React.StrictMode>
