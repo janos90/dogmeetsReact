@@ -15,7 +15,7 @@ class Dogs extends Component {
 
     componentDidMount() {
         getAllDogs().then((data) => {
-            this.setState({
+           this.setState({
                 dogs: data
             })
         })
@@ -51,7 +51,7 @@ class Dogs extends Component {
                                             <li>Height {dog.height}</li>
                                             <li>Weight{dog.weight}</li>
                                             <li>Birthday{dog.birthday}</li>
-                                            <li>Owned by:{dog.owner}</li>
+                                            <li>Owned by ID:{dog.owner}</li>
                                         </ul>
                                     </div>
                                     {isMyDog(dog.owner, this.state.user)? (

@@ -26,6 +26,12 @@ export function getUserInfo(token){
         'Authorization': 'Token '+token}}).then(response => response.data);
 }
 
+export function getUserById(token, userID){
+        let url = BASE_URL + 'api/users/' + userID + '/'
+    return axios.get(url, {headers: {
+        'Authorization': 'Token '+token}}).then(response => response.data);
+}
+
 export function isMyDog(owner, user){
     if(Object.keys(user).length !==0){
         return user.id === owner
@@ -39,6 +45,8 @@ export function isMyActivity(owner, user){
     }
     return false
 }
+
+
 
 // Activities
 export function getAllActivities() {
@@ -96,7 +104,6 @@ export function deleteActivity(token, activityID){
          alert("Activity Deleted")
     });
 }
-
 
 export function attendEvent(token, userID, activityID){
     let url = BASE_URL + 'api/attendevent/'

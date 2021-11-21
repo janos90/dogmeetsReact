@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {Cookies} from "react-cookie";
-import {deleteActivity, getActivity, getUserInfo} from "../../Functions";
+import {deleteDog, getTheDog, getUserInfo} from "../../Functions";
 
-function DeleteActivity(props) {
+function DeleteDog(props) {
     const location = new useLocation()
-    const {activityId} = location.state;
+    const {dogId} = location.state;
     const [owner, setOwner] = useState(0)
     let cookies = new Cookies()
 
@@ -15,9 +15,9 @@ function DeleteActivity(props) {
                 setOwner(data.id)
             })
 
-            getActivity(activityId).then((data) => {
+            getTheDog(dogId).then((data) => {
                 if (data.owner === owner) {
-                    deleteActivity(cookies.get('myToken'), activityId).then(() => {
+                    deleteDog(cookies.get('myToken'), dogId).then(() => {
                         alert('deleted successfully')
                          window.location.href = "/";
                     });
@@ -27,11 +27,10 @@ function DeleteActivity(props) {
     })
 
     return (
-        <div><h1>is anyone here?</h1>
-            <button>Confirm</button>
-            <button>Cancel</button>
+        <div>
+            <h1>Deleting...</h1>
         </div>
     );
 }
 
-export default DeleteActivity;
+export default DeleteDog;

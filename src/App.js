@@ -11,6 +11,9 @@ import AddDog from "./components/Dogs/AddDog";
 import Dogs from "./components/Dogs/Dogs";
 import EditActivity from "./components/Activities/EditActivity";
 import DeleteActivity from "./components/Activities/DeleteActivity";
+import EditDog from "./components/Dogs/EditDog";
+import DogDetail from "./components/Dogs/DogDetail";
+import DeleteDog from "./components/Dogs/DeleteDog";
 
 class App extends Component {
 
@@ -114,16 +117,16 @@ class App extends Component {
 
                             <Route exact path='/login' component={Login}/>
 
-                            <Route exact path='/Dogs' component={Dogs}/>
+                            <Route exact path='/dogs' component={Dogs}/>
                             <Route exact path='/addDog' component={AddDog}/>
-                            {/*<Route exact path='/editDog' component={EditDog}/>*/}
-                            {/*<Route exact path='/dogDetail' component={EditDog}/>*/}
+                            <Route exact path='/editDog' component={EditDog}/>
+                            <Route exact path='/dogDetail' component={DogDetail}/>
+                            <Route exact path='/deleteDog' component={DeleteDog}/>
+
 
                             <Route exact path='/activities' component={Activities}/>
                             <Route exact path='/addActivity' component={AddActivity}/>
-
                             <Route exact path='/editActivity' component={EditActivity}/>
-
                             <Route exact path='/activityDetail' component={ActivityDetail}/>
                             <Route exact path='/deleteActivity' component={DeleteActivity}/>
 
