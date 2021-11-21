@@ -20,16 +20,68 @@ export function userLogin(username, password) {
         }).catch(err => Promise.reject("something wrong" + err))
 }
 
+export function registerUser(firstName, lastName, email, phone, bio, username, password){
+    let url = BASE_URL + 'api/users/'
+    return axios.post(url, {
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "username": username,
+        "password": password,
+    })
+        .then(() => {
+            alert("User Created")
+            window.location.href = "/login";
+        })
+        .catch(err => Promise.reject('Add User Failed!' + err));
+}
+
+export function updateProfile(token, userId, profileId, firstName, lastName, email, phone, bio, username, password){
+    let url = BASE_URL + 'api/users/'+userId+'/'
+    return axios.put(url, {
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": email,
+        "username": username,
+        "password": password,
+    },{headers: {
+            'Authorization': 'Token '+token}})
+        .then(() => {
+
+            let url = BASE_URL + 'api/profiles/'+profileId+'/'
+            return axios.put(url, {
+                "bio": bio,
+                // "image": image,
+                "phone": phone,
+            },{headers: {
+                    'Authorization': 'Token '+token}})
+                .then(() => {
+                    alert("Profile Updated")
+                    window.location.href = "/";
+                })
+                .catch(err => Promise.reject('Edit Profile Failed!' + err));
+        })
+        .catch(err => Promise.reject('Edit Profile Failed!' + err));
+
+}
+
+
+
 export function getUserInfo(token){
     let url = BASE_URL + 'api/getuser/'
     return axios.get(url, {headers: {
-        'Authorization': 'Token '+token}}).then(response => response.data);
+            'Authorization': 'Token '+token}}).then(response => response.data);
+}
+
+export function getProfileByUser(token, userId){
+    let url = BASE_URL + 'api/getprofile/'
+
 }
 
 export function getUserById(token, userID){
-        let url = BASE_URL + 'api/users/' + userID + '/'
+    let url = BASE_URL + 'api/users/' + userID + '/'
     return axios.get(url, {headers: {
-        'Authorization': 'Token '+token}}).then(response => response.data);
+            'Authorization': 'Token '+token}}).then(response => response.data);
 }
 
 export function isMyDog(owner, user){
@@ -68,12 +120,12 @@ export function addActivity(token, name, location, startTime, description, owner
         "description": description,
         "owner": owner,
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(() => {
-		    alert("Post Added")
+            'Authorization': 'Token '+token}})
+        .then(() => {
+            alert("Post Added")
             window.location.href = "/";
-		})
-		.catch(err => Promise.reject('Add Post Failed!' + err));
+        })
+        .catch(err => Promise.reject('Add Post Failed!' + err));
 }
 
 export function updateActivity(token, activityID, name, location, startTime, description, owner){
@@ -87,22 +139,22 @@ export function updateActivity(token, activityID, name, location, startTime, des
         "description": description,
         "owner": owner,
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(() => {
-		    alert("Activity Updated")
+            'Authorization': 'Token '+token}})
+        .then(() => {
+            alert("Activity Updated")
             window.location.href = "/";
-		})
-		.catch(err => Promise.reject('Edit Activity Failed!' + err));
+        })
+        .catch(err => Promise.reject('Edit Activity Failed!' + err));
 }
 
 export function deleteActivity(token, activityID){
     let url = BASE_URL + 'api/activities/'+activityID+'/'
 
     return axios.delete(url, {headers: {
-		'Authorization': 'Token '+token}})
+            'Authorization': 'Token '+token}})
         .then(() => {
-         alert("Activity Deleted")
-    });
+            alert("Activity Deleted")
+        });
 }
 
 export function attendEvent(token, userID, activityID){
@@ -111,11 +163,11 @@ export function attendEvent(token, userID, activityID){
         "user_id":userID,
         "activity_id":activityID
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(() => {
+            'Authorization': 'Token '+token}})
+        .then(() => {
             window.location.reload(false);
-		})
-		.catch(err => Promise.reject('Something wrong'));
+        })
+        .catch(err => Promise.reject('Something wrong'));
 }
 
 export function disAttendEvent(token, userID, activityID){
@@ -124,11 +176,11 @@ export function disAttendEvent(token, userID, activityID){
         "user_id":userID,
         "post_id":activityID
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(response => {
+            'Authorization': 'Token '+token}})
+        .then(response => {
             window.location.reload(false);
-		})
-		.catch(err => Promise.reject('Something wrong'));
+        })
+        .catch(err => Promise.reject('Something wrong'));
 }
 
 
@@ -155,12 +207,12 @@ export function addDog(token, name, breed, height,weight, birthday, image, owner
         // "image": image,
         "owner": owner,
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(response => {
-		    alert("Post Added")
+            'Authorization': 'Token '+token}})
+        .then(response => {
+            alert("Post Added")
             window.location.href = "/";
-		})
-		.catch(err => Promise.reject('Add Post Failed!'));
+        })
+        .catch(err => Promise.reject('Add Post Failed!'));
 }
 
 export function updateDog(token, dogID, name, breed, height,weight, birthday, image, owner){
@@ -175,21 +227,21 @@ export function updateDog(token, dogID, name, breed, height,weight, birthday, im
         "image": image,
         "owner": owner,
     },{headers: {
-		'Authorization': 'Token '+token}})
-		.then(response => {
-		    alert("Dog Updated")
+            'Authorization': 'Token '+token}})
+        .then(response => {
+            alert("Dog Updated")
             window.location.href = "/";
-		})
-		.catch(err => Promise.reject('Edit Activity Failed!'));
+        })
+        .catch(err => Promise.reject('Edit Activity Failed!'));
 }
 
 export function deleteDog(token, dogID){
     let url = BASE_URL + 'api/dogs/'+dogID+'/'
 
     return axios.delete(url, {headers: {
-		'Authorization': 'Token '+token}})
+            'Authorization': 'Token '+token}})
         .then(response => {
-         alert("Dog Deleted")
-    });
+            alert("Dog Deleted")
+        });
 }
 

@@ -23,7 +23,7 @@ function AddDog(props) {
                 setAllowToAdd(true)
             })
         }
-        }
+      }
 
       fetchData().catch(err => {
           alert("some error occurred "+ err)

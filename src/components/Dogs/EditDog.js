@@ -97,6 +97,8 @@ function EditDog(props) {
 
                         <button className={"btn btn-primary"} onClick={updateDogBtn}>Save</button>
                     </div>
+                ) : ("<h1>you do not have permission to edit this page</h1>")
+            }
 
         </div>
     );

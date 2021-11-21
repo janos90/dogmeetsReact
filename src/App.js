@@ -14,6 +14,7 @@ import DeleteActivity from "./components/Activities/DeleteActivity";
 import EditDog from "./components/Dogs/EditDog";
 import DogDetail from "./components/Dogs/DogDetail";
 import DeleteDog from "./components/Dogs/DeleteDog";
+import Register from "./components/Users/Register";
 
 class App extends Component {
 
@@ -116,6 +117,7 @@ class App extends Component {
 
 
                             <Route exact path='/login' component={Login}/>
+                            <Route exact path='/register' component={Register}/>
 
                             <Route exact path='/dogs' component={Dogs}/>
                             <Route exact path='/addDog' component={AddDog}/>
