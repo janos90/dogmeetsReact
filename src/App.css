@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+
+.dog-tiles {
+  padding: 10px;
+}
+
+.dog-tile {
+  max-width: 300px;
+  background-color: #61dafb;
+  border-radius: 15px;
+
+}
