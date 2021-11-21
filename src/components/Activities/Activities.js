@@ -30,9 +30,11 @@ class Activities extends Component {
 
     render() {
         return (
-            <div>
+            <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
                 {this.state.activities.map(activity =>
-                    <div key={activity.id} className="activity">
+                    <div key={activity.id} className="col">
+                                            <div className="card shadow-sm">
+
                         <p><Link to={{pathname:"/activityDetail",
                                     state: {activityID: activity.id}}}
                                 >{activity.name}</Link>  -
@@ -67,6 +69,7 @@ class Activities extends Component {
                             }
                         </div>
                     {/*<li><a className="dropdown-item" href="#" key={activity.id}>{activity.name}</a>*/}
+                    </div>
                     </div>
                 )}
             </div>

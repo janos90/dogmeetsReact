@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {userLogin} from "../Functions";
 import {Cookies} from "react-cookie";
 import {useHistory} from "react-router-dom";
+import dogLogo from '../static/dogLogo.jpg'
 
 function Login(props) {
 
@@ -26,17 +27,18 @@ function Login(props) {
     }
 
 
-
     return (
-        <div>
-            <h1>Login</h1>
+        <div className={'form-signin'}>
+            <img className="mb-4" src={dogLogo} alt='Logo' width="72" height="57" />
+
+            <h1 className={'h3 mb-3 fw-normal'}>Please Sign In</h1>
             <div className="mb-3">
                 <label htmlFor={"username"} className={"form-label"}>Username</label>
                 <input
                     type={"text"}
                     className={"form-control"}
                     id={"username"}
-                    placeholder={"please enter your username"}
+                    placeholder={"Username"}
                     value={username}
                     onChange={e=>setUsername(e.target.value)}
                 />
@@ -48,7 +50,7 @@ function Login(props) {
                     type={"text"}
                     className={"form-control"}
                     id={"password"}
-                    placeholder={"please enter your password"}
+                    placeholder={"Password"}
                     value={password}
                     onChange={e=>setPassword(e.target.value)}
                 />
@@ -57,8 +59,9 @@ function Login(props) {
                 <label htmlFor={"error"} className={"form-label"}>{error}</label>
             </div>
 
+            <button className="w-100 btn btn-lg btn-primary" onClick={loginBtn}>Login</button>
+            <p className="mt-5 mb-3 text-muted">Juan Garcia 7420</p>
 
-            <button className="btn btn-primary" onClick={loginBtn}>Login</button>
         </div>
     );
 }
