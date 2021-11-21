@@ -47,7 +47,7 @@ function ActivityDetail(props) {
         }
         fetchData().catch(err => {alert("something went wrong "+ err)})
 
-    }, [activityID, allowToEdit, participants, user])
+    }, [allowToEdit])
     const attendBtn = () => {
         alert("You are now attending")
         attendEvent(cookies.get("myToken"), user, activityID).catch(err => {alert('something went wrong: ' + err)})

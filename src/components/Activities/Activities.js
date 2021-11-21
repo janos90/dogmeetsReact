@@ -30,6 +30,12 @@ class Activities extends Component {
 
     render() {
         return (
+            <Fragment>
+                <header>
+                    <h1>Activities</h1>
+                    <h3>Click for more info</h3>
+                </header>
+            <br/>
             <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
                 {this.state.activities.map(activity =>
                     <div key={activity.id} className="col">
@@ -65,7 +71,30 @@ class Activities extends Component {
                                 </tbody>
                             </table>
                             {
-                                isMyActivity(activity.owner, this.state.user)? (<Fragment><button>Edit</button><button>Delete</button></Fragment>):null
+                            isMyActivity(activity.owner, this.state.user)? (
+                                <div className={'d-flex justify-content-between align-items-center'}>
+                                    <div className={'btn-group'}>
+                                            <Link to={{
+                                                pathname:"/editActivity",
+                                                state: {activityId: activity.id}
+                                            }}
+                                            className={"btn btn-secondary"}
+                                            >
+                                                Edit
+                                            </Link>
+
+
+                                            <Link to=
+                                                {{pathname:"/deleteActivity",
+                                                state: {activityId: activity.id}
+                                            }}
+                                            className={"btn btn-danger"}
+                                            >
+                                                Delete
+                                            </Link>
+                                    </div>
+                                </div>
+                            ) : ("")
                             }
                         </div>
                     {/*<li><a className="dropdown-item" href="#" key={activity.id}>{activity.name}</a>*/}
@@ -73,6 +102,7 @@ class Activities extends Component {
                     </div>
                 )}
             </div>
+                </Fragment>
         );
     }
 }

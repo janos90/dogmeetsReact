@@ -17,7 +17,7 @@ export function userLogin(username, password) {
             cookies.set('myToken', response.data.token)
             window.location.reload(false);
 
-        }).catch(err => Promise.reject("something wrong"))
+        }).catch(err => Promise.reject("something wrong" + err))
 }
 
 export function getUserInfo(token){
@@ -61,36 +61,38 @@ export function addActivity(token, name, location, startTime, description, owner
         "owner": owner,
     },{headers: {
 		'Authorization': 'Token '+token}})
-		.then(response => {
+		.then(() => {
 		    alert("Post Added")
             window.location.href = "/";
 		})
-		.catch(err => Promise.reject('Add Post Failed!'));
+		.catch(err => Promise.reject('Add Post Failed!' + err));
 }
 
-export function updateActivity(token, activityID, name, location, startTime, owner){
-    let url = BASE_URL + 'api/posts/'+activityID+'/'
+export function updateActivity(token, activityID, name, location, startTime, description, owner){
+    let url = BASE_URL + 'api/activities/'+activityID+'/'
+    console.log(owner)
     return axios.put(url, {
         "name": name,
-        // "header_image": header_image,
+        // "image": image,
         "location": location,
         "startTime": startTime,
+        "description": description,
         "owner": owner,
     },{headers: {
 		'Authorization': 'Token '+token}})
-		.then(response => {
+		.then(() => {
 		    alert("Activity Updated")
             window.location.href = "/";
 		})
-		.catch(err => Promise.reject('Edit Post Failed!'));
+		.catch(err => Promise.reject('Edit Activity Failed!' + err));
 }
 
 export function deleteActivity(token, activityID){
-    let url = BASE_URL + 'api/posts/'+activityID+'/'
+    let url = BASE_URL + 'api/activities/'+activityID+'/'
 
     return axios.delete(url, {headers: {
 		'Authorization': 'Token '+token}})
-        .then(response => {
+        .then(() => {
          alert("Activity Deleted")
     });
 }
@@ -100,10 +102,10 @@ export function attendEvent(token, userID, activityID){
     let url = BASE_URL + 'api/attendevent/'
     return axios.patch(url, {
         "user_id":userID,
-        "post_id":activityID
+        "activity_id":activityID
     },{headers: {
 		'Authorization': 'Token '+token}})
-		.then(response => {
+		.then(() => {
             window.location.reload(false);
 		})
 		.catch(err => Promise.reject('Something wrong'));
@@ -153,3 +155,34 @@ export function addDog(token, name, breed, height,weight, birthday, image, owner
 		})
 		.catch(err => Promise.reject('Add Post Failed!'));
 }
+
+export function updateDog(token, dogID, name, breed, height,weight, birthday, image, owner){
+    let url = BASE_URL + 'api/dogs/'+dogID+'/'
+    return axios.put(url, {
+        "name": name,
+        // "image": image,
+        "breed": breed,
+        "height": height,
+        "weight": weight,
+        "birthday": birthday,
+        "image": image,
+        "owner": owner,
+    },{headers: {
+		'Authorization': 'Token '+token}})
+		.then(response => {
+		    alert("Dog Updated")
+            window.location.href = "/";
+		})
+		.catch(err => Promise.reject('Edit Activity Failed!'));
+}
+
+export function deleteDog(token, dogID){
+    let url = BASE_URL + 'api/dogs/'+dogID+'/'
+
+    return axios.delete(url, {headers: {
+		'Authorization': 'Token '+token}})
+        .then(response => {
+         alert("Dog Deleted")
+    });
+}
+

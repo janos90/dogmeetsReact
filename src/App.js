@@ -9,6 +9,8 @@ import AddActivity from "./components/Activities/AddActivity";
 import ActivityDetail from "./components/Activities/ActivityDetail";
 import AddDog from "./components/Dogs/AddDog";
 import Dogs from "./components/Dogs/Dogs";
+import EditActivity from "./components/Activities/EditActivity";
+import DeleteActivity from "./components/Activities/DeleteActivity";
 
 class App extends Component {
 
@@ -119,8 +121,11 @@ class App extends Component {
 
                             <Route exact path='/activities' component={Activities}/>
                             <Route exact path='/addActivity' component={AddActivity}/>
-                            {/*<Route exact path='/editActivity' component={EditActivity}/>*/}
+
+                            <Route exact path='/editActivity' component={EditActivity}/>
+
                             <Route exact path='/activityDetail' component={ActivityDetail}/>
+                            <Route exact path='/deleteActivity' component={DeleteActivity}/>
 
                             {/*<Route exact path='/profile' component={Profile}/>*/}
                         </div>

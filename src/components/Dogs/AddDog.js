@@ -15,15 +15,19 @@ function AddDog(props) {
 
     let cookies = new Cookies()
 
-    useEffect(async () => {
-
+    useEffect(() => {
+      async function fetchData() {
         if (cookies.get('myToken')) {
             getUserInfo(cookies.get("myToken")).then((data) => {
                 setOwner(data.id)
                 setAllowToAdd(true)
             })
         }
+        }
 
+      fetchData().catch(err => {
+          alert("some error occurred "+ err)
+      })
 
     }, [allowToAdd])
 
