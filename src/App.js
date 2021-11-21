@@ -15,6 +15,8 @@ import EditDog from "./components/Dogs/EditDog";
 import DogDetail from "./components/Dogs/DogDetail";
 import DeleteDog from "./components/Dogs/DeleteDog";
 import Register from "./components/Users/Register";
+import EditProfile from "./components/Users/EditProfile";
+import DeleteProfile from "./components/Users/DeleteProfile";
 
 class App extends Component {
 
@@ -70,8 +72,9 @@ class App extends Component {
                                         </li>
                                         {(auth) ? (
                                             <li className="nav-item">
-                                                <a className="nav-link active" aria-current="page" href="/addActivity">Add
-                                                    Activity</a>
+                                                <a className="nav-link active" aria-current="page" href="/addActivity">
+                                                    Add Activity
+                                                </a>
                                             </li>
                                         ): ''}
 
@@ -83,7 +86,7 @@ class App extends Component {
 
                                             <li className="nav-item">
                                                 <a className="nav-link active" aria-current="page"
-                                                   href="/activities">Profile</a>
+                                                   href="/profile">Profile</a>
                                             </li>
                                         ): ''}
                                         {(auth) ? (
@@ -118,6 +121,8 @@ class App extends Component {
 
                             <Route exact path='/login' component={Login}/>
                             <Route exact path='/register' component={Register}/>
+                            <Route exact path='/profile' component={EditProfile}/>
+                            <Route exact path='/deleteProfile' component={DeleteProfile}/>
 
                             <Route exact path='/dogs' component={Dogs}/>
                             <Route exact path='/addDog' component={AddDog}/>

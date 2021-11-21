@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getTheDog, getUserInfo, updateProfile} from "../../Functions";
+import {getProfile, getProfileByUser, getTheDog, getUserInfo, updateProfile} from "../../Functions";
 import {Cookies} from "react-cookie";
 
 function EditProfile(props) {
@@ -18,17 +18,18 @@ function EditProfile(props) {
     let cookies = new Cookies()
     useEffect( () => {
             async function fetchData() {
-                if (cookies.get('myToken')) {
-                    await getUserInfo(cookies.get("myToken")).then((data) => {
+                let token = cookies.get("myToken")
+                if (token) {
+                    await getUserInfo(token).then((data) => {
                         setUser(data)
                     })
-
-                    getProfileByUser(user.id).then((data) => {
+                    console.log(user)
+                    getProfile(token, user.profile).then((profile) => {
                         setFirstName(user.first_name)
                         setLastName(user.last_name)
                         setEmail(user.email)
-                        setPhone(data.phone)
-                        setBio(data.bio)
+                        setPhone(profile.phone)
+                        setBio(profile.bio)
                         setUsername(user.username)
                         setPassword(user.password)
                     })
@@ -41,9 +42,9 @@ function EditProfile(props) {
 
     const saveProfileBtn = ()=>{
         getUserInfo(cookies.get("myToken")).then((data) => {
-            setUserId(data.id)
+            setUser(data)
         })
-        updateProfile(cookies.get("myToken"), userId, profileId, firstName, lastName, email, phone, bio, username, password).catch(err => {
+        updateProfile(cookies.get("myToken"), user.id, user.profile, firstName, lastName, email, phone, bio, username, password).catch(err => {
             alert('Something went wrong '+err)
         })
     }

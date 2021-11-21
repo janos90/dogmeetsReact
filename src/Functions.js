@@ -36,6 +36,14 @@ export function registerUser(firstName, lastName, email, phone, bio, username, p
         .catch(err => Promise.reject('Add User Failed!' + err));
 }
 
+export function getProfile(token, profileId){
+    console.log(token, profileId)
+    let url = BASE_URL + 'api/profiles/' + profileId + '/'
+    return axios.get(url, {headers: {
+            'Authorization': 'Token '+token}}).then(response => response.data);
+}
+
+
 export function updateProfile(token, userId, profileId, firstName, lastName, email, phone, bio, username, password){
     let url = BASE_URL + 'api/users/'+userId+'/'
     return axios.put(url, {
@@ -73,10 +81,6 @@ export function getUserInfo(token){
             'Authorization': 'Token '+token}}).then(response => response.data);
 }
 
-export function getProfileByUser(token, userId){
-    let url = BASE_URL + 'api/getprofile/'
-
-}
 
 export function getUserById(token, userID){
     let url = BASE_URL + 'api/users/' + userID + '/'
