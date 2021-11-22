@@ -8,6 +8,8 @@ function AddActivity(props) {
     const [location, setLocation] = useState('')
     const [startTime, setStartTime] = useState('')
     const [description, setDescription] = useState('')
+    const [lat, setLat] = useState('')
+    const [lng, setLng] = useState('')
 
     const [owner, setOwner] = useState('')
 
@@ -28,7 +30,7 @@ function AddActivity(props) {
     }, [allowToAdd])
 
     const addActivityBtn =()=>{
-       addActivity(cookies.get("myToken"), name, location, startTime, description, owner).catch(err => {
+       addActivity(cookies.get("myToken"), name, location, startTime, description, owner, lat, lng).catch(err => {
            alert("something went wrong "+ err)
        });
     }
@@ -65,6 +67,18 @@ function AddActivity(props) {
                 <label htmlFor={"description"} className={"form-label"}>description</label>
                 <input type={"text"} className={"form-control"} id={"description"}
                        value={description} onChange={e => setDescription(e.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor={"lat"} className={"form-label"}>Lat</label>
+                <input type={"text"} className={"form-control"} id={"lat"}
+                       value={lat} onChange={e => setLat(e.target.value)}
+                />
+            </div>
+            <div className="mb-3">
+                <label htmlFor={"lng"} className={"form-label"}>Lng</label>
+                <input type={"text"} className={"form-control"} id={"lng"}
+                       value={lng} onChange={e => setLng(e.target.value)}
                 />
             </div>
         <button className={"btn btn-primary"} onClick={addActivityBtn}>Add</button>
