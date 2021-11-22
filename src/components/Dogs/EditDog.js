@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
-import {getActivity, getTheDog, getUserInfo, updateActivity, updateDog} from "../../Functions";
+import {getTheDog, getUserInfo, updateDog} from "../../Functions";
 import {Cookies} from "react-cookie";
 
 function EditDog(props) {

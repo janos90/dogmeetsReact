@@ -37,7 +37,6 @@ export function registerUser(firstName, lastName, email, phone, bio, username, p
 }
 
 export function getProfile(token, profileId){
-    console.log(token, profileId)
     let url = BASE_URL + 'api/profiles/' + profileId + '/'
     return axios.get(url, {headers: {
             'Authorization': 'Token '+token}}).then(response => response.data);
@@ -46,18 +45,16 @@ export function getProfile(token, profileId){
 
 export function updateProfile(token, userId, profileId, firstName, lastName, email, phone, bio, username, password){
     let url = BASE_URL + 'api/users/'+userId+'/'
-    return axios.put(url, {
+    return axios.patch(url, {
         "first_name": firstName,
         "last_name": lastName,
         "email": email,
         "username": username,
-        "password": password,
     },{headers: {
             'Authorization': 'Token '+token}})
         .then(() => {
-
             let url = BASE_URL + 'api/profiles/'+profileId+'/'
-            return axios.put(url, {
+            return axios.patch(url, {
                 "bio": bio,
                 // "image": image,
                 "phone": phone,

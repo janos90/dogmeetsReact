@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {getProfile, getProfileByUser, getTheDog, getUserInfo, updateProfile} from "../../Functions";
+import React, {useEffect, useRef, useState} from 'react';
+import {getProfile, getUserInfo, updateProfile} from "../../Functions";
 import {Cookies} from "react-cookie";
+import JoditEditor from "jodit-react";
 
 function EditProfile(props) {
     const [firstName, setFirstName] = useState('')
@@ -10,7 +11,6 @@ function EditProfile(props) {
     const [bio, setBio] = useState('')
 
     const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
     const [user, setUser] = useState('')
 
 
@@ -22,16 +22,17 @@ function EditProfile(props) {
                 if (token) {
                     await getUserInfo(token).then((data) => {
                         setUser(data)
-                    })
-                    console.log(user)
-                    getProfile(token, user.profile).then((profile) => {
-                        setFirstName(user.first_name)
-                        setLastName(user.last_name)
-                        setEmail(user.email)
-                        setPhone(profile.phone)
-                        setBio(profile.bio)
-                        setUsername(user.username)
-                        setPassword(user.password)
+                        getProfile(token, data.profile).then((profile) => {
+                            setFirstName(data.first_name)
+                            setLastName(data.last_name)
+                            setEmail(data.email)
+                            setPhone(profile.phone)
+                            setBio(profile.bio)
+                            setUsername(data.username)
+                        })
+
+                    }).catch(err => {
+                        console.log(err)
                     })
 
                 }
@@ -44,12 +45,77 @@ function EditProfile(props) {
         getUserInfo(cookies.get("myToken")).then((data) => {
             setUser(data)
         })
-        updateProfile(cookies.get("myToken"), user.id, user.profile, firstName, lastName, email, phone, bio, username, password).catch(err => {
+        updateProfile(cookies.get("myToken"), user.id, user.profile, firstName, lastName, email, phone, bio, username).catch(err => {
             alert('Something went wrong '+err)
         })
     }
+
+    const editor = useRef(null)
+	const config = {
+		readonly: false // all options from https://xdsoft.net/jodit/doc/
+	}
+
     return (
-        <div></div>
+        <div>
+            <h1>Update Profile for {firstName} {lastName}</h1>
+            <label htmlFor={"firstName"} className={"form-label"}>First Name</label>
+            <input
+                type={"text"}
+                className={"form-control"}
+                id={"firstName"}
+                placeholder={"First Name"}
+                value={firstName}
+                onChange={e=>setFirstName(e.target.value)}
+            />
+
+            <label htmlFor={"lastName"} className={"form-label"}>Last Name</label>
+            <input
+                type={"text"}
+                className={"form-control"}
+                id={"lastName"}
+                placeholder={"Last Name"}
+                value={lastName}
+                onChange={e=>setLastName(e.target.value)}
+            />
+            <label htmlFor={"email"} className={"form-label"}>Email</label>
+            <input
+                type={"email"}
+                className={"form-control"}
+                id={"email"}
+                placeholder={"Email"}
+                value={email}
+                onChange={e=>setEmail(e.target.value)}
+            />
+            <label htmlFor={"phone"} className={"form-label"}>Phone</label>
+            <input
+                type={'tel'}
+                className={"form-control"}
+                id={"phone"}
+                placeholder={"Phone"}
+                value={phone}
+                onChange={e=>setPhone(e.target.value)}
+            />
+            <label htmlFor={"bio"} className={"form-label"}>Bio</label>
+            <JoditEditor
+            	ref={editor}
+                value={bio}
+                config={config}
+		        tabIndex={1} // tabIndex of textarea
+		        onBlur={newContent => setBio(newContent)} // preferred to use only this option to update the content for performance reasons
+                onChange={newContent => {}}
+            />
+
+            <label htmlFor={"username"} className={"form-label"}>Username</label>
+            <input
+                type={"text"}
+                className={"form-control"}
+                id={"username"}
+                placeholder={"Username"}
+                value={username}
+                onChange={e=>setUsername(e.target.value)}
+            />
+            <button className={'btn btn-primary'} onClick={saveProfileBtn}>Save</button>
+        </div>
     );
 }
 
