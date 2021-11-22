@@ -1,19 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {Cookies} from "react-cookie";
-import {getTheDog, getUserById, getUserInfo} from "../../Functions";
+import {getTheDog, getUserInfo} from "../../Functions";
 
 
 function ActivityDetail(props) {
     const location = new useLocation()
     const {dogID} = location.state;
+    const {owner} = location.state;
     const [name, setName] = useState('')
     const [breed, setBreed] = useState('')
     const [height, setHeight] = useState('')
     const [weight, setWeight] = useState('')
     const [birthday, setBirthday] = useState('')
-    const [ownerId, setOwnerId] = useState('')
-    const [owner, setOwner] = useState('')
 
     const [user, setUser] = useState(0)
     const [allowToEdit, setAllowToEdit] = useState(null)
@@ -27,9 +26,7 @@ function ActivityDetail(props) {
                 await getUserInfo(cookies.get("myToken")).then((data) => {
                     setUser(data.id)
                 })
-
-
-                getTheDog(dogID).then((data) => {
+                await getTheDog(dogID).then((data) => {
                     if (data.owner !== user) {
                         setAllowToEdit(true)
                     } else {
@@ -40,15 +37,7 @@ function ActivityDetail(props) {
                     setHeight(data.height)
                     setWeight(data.weight)
                     setBirthday(data.birthday)
-                    setOwnerId(data.owner)
-
                 })
-
-                await getUserById(cookies.get("myToken"), ownerId).then((data) => {
-                    setOwner(data)
-                })
-
-
             }
         }
         fetchData().catch(err => {alert("something went wrong "+ err)})
@@ -57,13 +46,21 @@ function ActivityDetail(props) {
 
     return (
         <div>
-            <h1>Dog Detail</h1>
-            <h2>{name}</h2>
-            <p>{breed}</p>
-            <p>{height}</p>
-            <p>{weight}</p>
-            <p>{birthday}</p>
-            <p>{owner.username}</p>
+            <div className={'dog-details'}>
+                <h1>Dog Detail</h1>
+                <h2>{name} {owner.last_name}</h2>
+                <p>{breed}</p>
+                <p>{height} Cm</p>
+                <p>{weight} Kg</p>
+                <p>{birthday}</p>
+                <p>{owner.username}</p>
+            </div>
+            <div className={'owner-details'}>
+                <h1>Owner Detail</h1>
+                <h2>{owner.first_name} {owner.last_name}</h2>
+                <p>{owner.profile.bio}</p>
+                <p>{owner.profile.phone}</p>
+            </div>
         </div>
     );
 }

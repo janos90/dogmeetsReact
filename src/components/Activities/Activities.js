@@ -35,82 +35,83 @@ class Activities extends Component {
                     <h1>Activities</h1>
                     <h3>Click for more info</h3>
                 </header>
-            <br/>
-            <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
-                {this.state.activities.map(activity =>
-                    <div key={activity.id} className="col">
-                                            <div className="card shadow-sm">
+                <br/>
+                <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
+                    {this.state.activities.map(activity =>
+                        <div key={activity.id} className="col">
+                            <div className="card shadow-sm">
 
-                        <p><Link to={{pathname:"/activityDetail",
-                                    state: {activityID: activity.id}}}
-                                >{activity.name}</Link>  -
-                        </p>
-                        <div>
-                            <table>
-                                <tbody>
-                                <tr>
-                                    <td>Location</td>
-                                    <td>{activity.location}</td>
-                                </tr>
-                                <tr>
-                                    <td>Time</td>
-                                    <td>{activity.startTime}</td>
-                                </tr>
-                                <tr>
-                                    <td>Dogs</td>
-                                    <td>{activity.dog? activity.dog.length : 0}</td>
-                                </tr>
-                                <tr>
-                                    <td>Participants</td>
-                                    <td>{activity.participants? activity.participants.length : 0}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hosted by:</td>
-                                    <td>{activity.owner}</td>
-                                </tr>
-                                <tr>
-                                    <td>Lat:</td>
-                                    <td>{activity.lat}</td>
-                                </tr>
-                                <tr>
-                                    <td>Lng:</td>
-                                    <td>{activity.lng}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            {
-                            isMyActivity(activity.owner, this.state.user)? (
-                                <div className={'d-flex justify-content-between align-items-center'}>
-                                    <div className={'btn-group'}>
-                                            <Link to={{
-                                                pathname:"/editActivity",
-                                                state: {activityId: activity.id}
-                                            }}
-                                            className={"btn btn-secondary"}
-                                            >
-                                                Edit
-                                            </Link>
+                                <h3>
+                                    <Link to={{pathname:"/activityDetail", state: {activityID: activity.id}}} >
+                                        {activity.name}
+                                    </Link>
+                                </h3>
+                                <div>
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td>Location</td>
+                                            <td>{activity.location}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Time</td>
+                                            <td>{activity.startTime}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dogs</td>
+                                            <td>{activity.dog? activity.dog.length : 0}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Participants</td>
+                                            <td>{activity.participants? activity.participants.length : 0}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Hosted by:</td>
+                                            <td>{activity.owner}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lat:</td>
+                                            <td>{activity.lat}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lng:</td>
+                                            <td>{activity.lng}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    {
+                                        isMyActivity(activity.owner, this.state.user)? (
+                                            <div className={'d-flex justify-content-between align-items-center'}>
+                                                <div className={'btn-group'}>
+                                                    <Link to={{
+                                                        pathname:"/editActivity",
+                                                        state: {activityId: activity.id}
+                                                    }}
+                                                          className={"btn btn-secondary"}
+                                                    >
+                                                        Edit
+                                                    </Link>
 
 
-                                            <Link to=
-                                                {{pathname:"/deleteActivity",
-                                                state: {activityId: activity.id}
-                                            }}
-                                            className={"btn btn-danger"}
-                                            >
-                                                Delete
-                                            </Link>
-                                    </div>
+                                                    <Link to=
+                                                              {{pathname:"/deleteActivity",
+                                                                  state: {activityId: activity.id}
+                                                              }}
+                                                          className={"btn btn-danger"}
+                                                    >
+                                                        Delete
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                        ) : ("")
+                                    }
                                 </div>
-                            ) : ("")
-                            }
+                                {/*<li><a className="dropdown-item" href="#" key={activity.id}>{activity.name}</a>*/}
+                            </div>
                         </div>
-                    {/*<li><a className="dropdown-item" href="#" key={activity.id}>{activity.name}</a>*/}
-                    </div>
-                    </div>
-                )}
-            </div>
-                </Fragment>
+                    )}
+                </div>
+            </Fragment>
         );
     }
 }

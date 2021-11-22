@@ -38,7 +38,7 @@ class Dogs extends Component {
                 <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
 
                     {this.state.dogs.map(dog =>
-                        <DogTile dog={dog} user={this.state.user} />
+                        <DogTile key={dog.id}  dog={dog} owner={dog.owner} user={this.state.user} />
                     )}
                 </div>
             </div>

@@ -47,6 +47,7 @@ export class MapContainer extends Component {
                         lat: this.props.lat,
                         lng: this.props.lng
                     }}
+                    zoom={5}
                 >
                     <Marker
                         position={{

@@ -36,6 +36,8 @@ function EditActivity(props) {
                     setStartTime(data.startTime)
                     setDescription(data.description)
                     setParticipants(data.participants)
+                    setLng(data.lng)
+                    setLat(data.lat)
 
                 })
 

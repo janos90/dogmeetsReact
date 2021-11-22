@@ -40,6 +40,7 @@ function AddDog(props) {
 
     const addDogBtn =()=>{
        // add image once it works again
+        console.log(owner)
        addDog(cookies.get("myToken"), name, breed, height,weight, birthday, owner).catch(err => {
            alert("something went wrong "+ err)
        });

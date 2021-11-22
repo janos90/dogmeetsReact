@@ -26,6 +26,8 @@ function EditParticipants(props) {
 
     }, [])
 
+
+
     return(
         <div>
             {partyObj.map(participant =>

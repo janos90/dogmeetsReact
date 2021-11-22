@@ -201,23 +201,24 @@ export function getTheDog(dogID){
     return axios.get(url).then(response => response.data);
 }
 
-export function addDog(token, name, breed, height,weight, birthday, image, owner){
+export function addDog(token, name, breed, height,weight, birthday, owner){
     let url = BASE_URL + 'api/dogs/'
     return axios.post(url, {
         "name": name,
         "breed": breed,
         "height": height,
         "weight": weight,
+        "owner": owner,
+
         "birthday": birthday,
         // "image": image,
-        "owner": owner,
     },{headers: {
             'Authorization': 'Token '+token}})
         .then(response => {
-            alert("Post Added")
-            window.location.href = "/";
+            alert("Dog Added")
+            window.location.href = "/dogs";
         })
-        .catch(err => Promise.reject('Add Post Failed!'));
+        .catch(err => Promise.reject('Add Dog Failed!'));
 }
 
 export function updateDog(token, dogID, name, breed, height,weight, birthday, image, owner){
