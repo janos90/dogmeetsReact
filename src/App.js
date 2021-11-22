@@ -17,6 +17,7 @@ import DeleteDog from "./components/Dogs/DeleteDog";
 import Register from "./components/Users/Register";
 import EditProfile from "./components/Users/EditProfile";
 import DeleteProfile from "./components/Users/DeleteProfile";
+import EditParticipants from "./components/Activities/EditParticipants";
 
 class App extends Component {
 
@@ -108,11 +109,6 @@ class App extends Component {
                                         )}
 
                                     </ul>
-                                    <form className="d-flex">
-                                        <input className="form-control me-2" type="search" placeholder="Search"
-                                               aria-label="Search"/>
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
-                                    </form>
                                 </div>
                             </div>
                         </nav>
@@ -136,6 +132,7 @@ class App extends Component {
                             <Route exact path='/editActivity' component={EditActivity}/>
                             <Route exact path='/activityDetail' component={ActivityDetail}/>
                             <Route exact path='/deleteActivity' component={DeleteActivity}/>
+                            <Route exact path='/editParticipants' component={EditParticipants}/>
 
                             {/*<Route exact path='/profile' component={Profile}/>*/}
                         </div>

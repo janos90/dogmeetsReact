@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {getActivity, getUserInfo, updateActivity} from "../../Functions";
 import {Cookies} from "react-cookie";
 
@@ -12,8 +12,10 @@ function EditActivity(props) {
     const [description, setDescription] = useState('')
     const [user, setUser] = useState(0)
     const [allowToEdit, setAllowToEdit] = useState(null)
-    const [attending, setAttending] = useState(false)
     const [participants, setParticipants] = useState([])
+    const [lat, setLat] = useState([])
+    const [lng, setLng] = useState([])
+
     let cookies = new Cookies()
 
     useEffect( () => {
@@ -35,9 +37,6 @@ function EditActivity(props) {
                     setDescription(data.description)
                     setParticipants(data.participants)
 
-                    if (participants.indexOf(user) !== -1) {
-                        setAttending(true)
-                    }
                 })
 
             }
@@ -47,7 +46,7 @@ function EditActivity(props) {
     }, [allowToEdit])
 
     const updateActivityBtn = () => {
-        updateActivity(cookies.get("myToken"), activityId, name, activityLocation, startTime, description, user).catch(err => {
+        updateActivity(cookies.get("myToken"), activityId, name, activityLocation, startTime, description, user, lat, lng).catch(err => {
             alert("something went wrong " + err)
         });
     }
@@ -125,9 +124,32 @@ function EditActivity(props) {
                             <input type={"text"} className={"form-control"} id={"description"}
                                    value={description} onChange={e => setDescription(e.target.value)}
                             />
-                        </div>
 
-                        <button className={"btn btn-primary"} onClick={updateActivityBtn}>Save</button>
+
+                            <div className="mb-3">
+                                <label htmlFor={"lat"} className={"form-label"}>Lat</label>
+                                <input type={"text"} className={"form-control"} id={"lat"}
+                                       value={lat} onChange={e => setLat(e.target.value)}
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label htmlFor={"lng"} className={"form-label"}>Lng</label>
+                                <input type={"text"} className={"form-control"} id={"lng"}
+                                       value={lng} onChange={e => setLng(e.target.value)}
+                                />
+                            </div>
+
+
+                            <Link to={{
+                                pathname:"/editParticipants",
+                                state: {activityId: activityId, participants: participants}
+                            }}
+                                  className={"btn btn-secondary"}>
+                                Edit participants
+                            </Link>
+                            <button className={"btn btn-primary"} onClick={updateActivityBtn}>Save</button>
+                        </div>
                     </div>
                 ) : (<div>You are not allowed to use this page</div>)
             }

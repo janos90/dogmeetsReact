@@ -104,7 +104,9 @@ export function isMyActivity(owner, user){
 // Activities
 export function getAllActivities() {
     let url = BASE_URL + 'api/activities/'
-    return axios.get(url).then(response => response.data)
+    return axios.get(url).then(response => {
+        return response.data
+    })
 }
 
 export function getActivity(activityID){
@@ -129,7 +131,7 @@ export function addActivity(token, name, location, startTime, description, owner
         .catch(err => Promise.reject('Add Post Failed!' + err));
 }
 
-export function updateActivity(token, activityID, name, location, startTime, description, owner){
+export function updateActivity(token, activityID, name, location, startTime, description, owner, lat, lng){
     let url = BASE_URL + 'api/activities/'+activityID+'/'
     console.log(owner)
     return axios.put(url, {
@@ -139,6 +141,8 @@ export function updateActivity(token, activityID, name, location, startTime, des
         "startTime": startTime,
         "description": description,
         "owner": owner,
+        "lat": lat,
+        "lng": lng
     },{headers: {
             'Authorization': 'Token '+token}})
         .then(() => {

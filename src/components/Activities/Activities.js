@@ -44,7 +44,7 @@ class Activities extends Component {
                         <p><Link to={{pathname:"/activityDetail",
                                     state: {activityID: activity.id}}}
                                 >{activity.name}</Link>  -
-                            {activity.owner} - {activity.startTime}</p>
+                        </p>
                         <div>
                             <table>
                                 <tbody>
@@ -58,15 +58,23 @@ class Activities extends Component {
                                 </tr>
                                 <tr>
                                     <td>Dogs</td>
-                                    <td>{activity.dog}</td>
+                                    <td>{activity.dog? activity.dog.length : 0}</td>
                                 </tr>
                                 <tr>
                                     <td>Participants</td>
-                                    <td>{activity.participants}</td>
+                                    <td>{activity.participants? activity.participants.length : 0}</td>
                                 </tr>
                                 <tr>
                                     <td>Hosted by:</td>
                                     <td>{activity.owner}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lat:</td>
+                                    <td>{activity.lat}</td>
+                                </tr>
+                                <tr>
+                                    <td>Lng:</td>
+                                    <td>{activity.lng}</td>
                                 </tr>
                                 </tbody>
                             </table>
