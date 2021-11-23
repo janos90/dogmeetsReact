@@ -9,7 +9,7 @@ function AddDog(props) {
     const [height, setHeight] = useState('')
     const [weight, setWeight] = useState('')
     const [birthday, setBirthday] = useState('')
-    // const [image, setImage] = useState('')
+    const [imageURL, setImageURL] = useState('')
 
     const [owner, setOwner] = useState('')
 
@@ -39,9 +39,7 @@ function AddDog(props) {
     // };
 
     const addDogBtn =()=>{
-       // add image once it works again
-        console.log(owner)
-       addDog(cookies.get("myToken"), name, breed, height,weight, birthday, owner).catch(err => {
+       addDog(cookies.get("myToken"), name, breed, height,weight, birthday, imageURL, owner).catch(err => {
            alert("something went wrong "+ err)
        });
     }
@@ -61,6 +59,18 @@ function AddDog(props) {
                        value={name} onChange={e => setName(e.target.value)}
                 />
             </div>
+            <div className="mb-3">
+                <label htmlFor={"imageURL"} className={"form-label"}>Image URL</label>
+                <input type={"text"} className={"form-control"} id={"imageURL"}
+                       value={imageURL} onChange={e => setImageURL(e.target.value)}
+                />
+            </div>
+                    <div>
+                        <p>Preview</p>
+                                        <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={imageURL} />
+
+                    </div>
+
 
             <div className="mb-3">
                 <label htmlFor={"breed"} className={"form-label"}>Breed</label>

@@ -29,7 +29,7 @@ function DogTile(props) {
                         {props.dog.name} {owner.last_name}
                     </Link>
                 </h4>
-                <img className={'bd-placeholder-img card-img-top'} src={props.dog.image}/>
+                <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={props.dog.imageURL} />
                 <div className={'card-body'}>
                     <div className={'card-text'}>
                         <ul>

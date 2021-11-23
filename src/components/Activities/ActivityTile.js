@@ -30,7 +30,7 @@ function ActivityTile(props) {
                 </Link>
             </h3>
             <div>
-                <img className={'img img-thumbnail rounded mx-auto d-block '} src={props.activity.imageURL} />
+                <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={props.activity.imageURL} />
                 <table>
                     <tbody>
                     <tr>

@@ -206,7 +206,7 @@ export function disAttendEvent(token, userID, activityID){
     let url = BASE_URL + 'api/disattendevent/'
     return axios.patch(url, {
         "user_id":userID,
-        "post_id":activityID
+        "activity_id":activityID
     },{headers: {
             'Authorization': 'Token '+token}})
         .then(response => {
@@ -236,7 +236,7 @@ export function addDog(token, name, breed, height,weight, birthday, imageURL, ow
         "height": height,
         "weight": weight,
         "owner": owner,
-        "imageURL": "imageURL",
+        "imageURL": imageURL,
 
         "birthday": birthday,
     },{headers: {

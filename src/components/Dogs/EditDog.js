@@ -14,7 +14,7 @@ function EditDog(props) {
     const [birthday, setBirthday] = useState('')
     const [user, setUser] = useState(0)
     const [owner, setOwner] = useState(0)
-        const [image, setImage] = useState(0)
+        const [imageURL, setImageURL] = useState(0)
 
 
 
@@ -39,7 +39,7 @@ function EditDog(props) {
                         setHeight(data.height)
                         setWeight(data.weight)
                         setBirthday(data.birthday)
-                        setImage(data.image)
+                        setImageURL(data.image)
                         setOwner(data.owner)
 
                     })
@@ -51,7 +51,7 @@ function EditDog(props) {
         }, [allowToEdit])
 
         const updateDogBtn = () => {
-            updateDog(cookies.get("myToken"), dogId, name, breed, height, birthday, image, weight, owner).catch(err => {
+            updateDog(cookies.get("myToken"), dogId, name, breed, height, birthday, imageURL, weight, owner).catch(err => {
             alert("something went wrong " + err)
         });
     }
@@ -68,6 +68,18 @@ function EditDog(props) {
                                    value={name} onChange={e => setName(e.target.value)}
                             />
                         </div>
+                        <div className="mb-3">
+                <label htmlFor={"imageURL"} className={"form-label"}>Image URL</label>
+                <input type={"text"} className={"form-control"} id={"imageURL"}
+                       value={imageURL} onChange={e => setImageURL(e.target.value)}
+                />
+            </div>
+                                            <div>
+                        <p>Preview</p>
+                                        <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={imageURL} />
+
+                    </div>
+
 
                         <div className="mb-3">
                             <label htmlFor={"breed"} className={"form-label"}>Breed</label>
@@ -97,7 +109,7 @@ function EditDog(props) {
 
                         <button className={"btn btn-primary"} onClick={updateDogBtn}>Save</button>
                     </div>
-                ) : ("<h1>you do not have permission to edit this page</h1>")
+                ) : (<h1>you do not have permission to edit this page</h1>)
             }
 
         </div>

@@ -13,6 +13,7 @@ function ActivityDetail(props) {
     const [height, setHeight] = useState('')
     const [weight, setWeight] = useState('')
     const [birthday, setBirthday] = useState('')
+    const [imageURL, setImageURL] = useState('')
 
     const [user, setUser] = useState(0)
     const [allowToEdit, setAllowToEdit] = useState(null)
@@ -37,6 +38,7 @@ function ActivityDetail(props) {
                     setHeight(data.height)
                     setWeight(data.weight)
                     setBirthday(data.birthday)
+                    setImageURL(data.imageURL)
                 })
             }
         }
@@ -49,6 +51,10 @@ function ActivityDetail(props) {
             <div className={'dog-details'}>
                 <h1>Dog Detail</h1>
                 <h2>{name} {owner.last_name}</h2>
+                <p>
+                                    <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={imageURL} />
+
+                </p>
                 <p>{breed}</p>
                 <p>{height} Cm</p>
                 <p>{weight} Kg</p>

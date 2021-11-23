@@ -43,8 +43,9 @@ function AddActivity(props) {
     }
         const setMyLatLng = (latLng) => {
         console.log("working!", latLng)
-            setLat(latLng.lat)
-                        setLng(latLng.lng)
+        setLat((latLng.lat).toFixed(5))
+        setLng((latLng.lng).toFixed(5))
+
 
     }
 
