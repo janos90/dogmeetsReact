@@ -3,6 +3,8 @@ import {useLocation} from "react-router-dom";
 import {Cookies} from "react-cookie";
 import {attendEvent, disAttendEvent, getActivity, getUserInfo} from "../../Functions";
 import MapContainer from "../Extra/GoogleMap";
+import AddToCalendar from "@culturehq/add-to-calendar";
+import AddToMyCalender from "../Extra/AddToMyCalender";
 
 
 function ActivityDetail(props) {
@@ -12,7 +14,10 @@ function ActivityDetail(props) {
     const [activityLocation, setActivityLocation] = useState('')
     const [activityLat, setActivityLat] = useState('')
     const [activityLng, setActivityLng] = useState('')
-    const [startTime, setStartTime] = useState('')
+
+    const [startTime, setStartTime] = useState("2018-12-06T17:00:00-05:00")
+    const [endTime, setEndTime] = useState('2018-12-06T18:00:00-05:00')
+
     const [description, setDescription] = useState('')
     const [user, setUser] = useState(0)
     const [allowToEdit, setAllowToEdit] = useState(null)
@@ -39,13 +44,16 @@ function ActivityDetail(props) {
                     setActivityLocation(data.location)
                     setActivityLat(data.lat)
                     setActivityLng(data.lng)
-                    setStartTime(data.startTime)
+                    setStartTime(new Date(data.startTime).toISOString())
+
                     setDescription(data.description)
                     setParticipants(data.participants)
 
                     if (participants.indexOf(user) !== -1) {
                         setAttending(true)
                     }
+
+
                 })
 
             }
@@ -72,8 +80,16 @@ function ActivityDetail(props) {
             <p>{description}</p>
             <p>{participants.length}</p>
             <p>{attending ? ('You are Attending this event'):("You are Not Attending this event")}</p>
+            <AddToMyCalender
 
+                name={name}
+                details={description}
+                location={activityLocation}
+                startsAt={startTime}
+                endsAt='2018-12-06T18:00:00-05:00'
+            />
             {attending ? (<button onClick={disAttendBtn}>un Attend</button>):(<button onClick={attendBtn}>Attend</button>)}
+            <br />
             <div className="align-content-lg-center">
                 <header>
                     <h3>Location</h3>
