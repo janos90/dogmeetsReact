@@ -73,6 +73,12 @@ class Activities extends Component {
                         this.setState({sortOrder: 'name'})
                     }
                     break;
+
+                case 'date':
+                    sorted.sort((a, b) => {
+                        return a.startTime.localeCompare(b.startTime);
+                    })
+                    break;
             }
             this.setState({activities: sorted})
 
@@ -88,6 +94,11 @@ this.sort()
         this.setState({sortOrder: 'distance'})
 this.sort()
     }
+    sortByDate() {
+        this.setState({sortOrder: 'date'})
+this.sort()
+    }
+
 
 
     render() {
@@ -99,6 +110,7 @@ this.sort()
                     Sort By:
                     <button onClick={() => this.sortByName()} className={'btn btn-secondary'}>name</button>
                     <button onClick={() => this.sortByDistance()} className={'btn btn-secondary'}>distance</button>
+                    <button onClick={() => this.sortByDate()} className={'btn btn-secondary'}>Date</button>
                 </header>
                 <br/>
                 <div className={'row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'}>
