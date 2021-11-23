@@ -9,6 +9,7 @@ function EditProfile(props) {
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
     const [bio, setBio] = useState('')
+    const [imageURL, setImageURL] = useState('')
 
     const [username, setUsername] = useState('')
     const [user, setUser] = useState('')
@@ -25,6 +26,7 @@ function EditProfile(props) {
                         getProfile(token, data.profile).then((profile) => {
                             setFirstName(data.first_name)
                             setLastName(data.last_name)
+                            setImageURL(profile.imageURL)
                             setEmail(data.email)
                             setPhone(profile.phone)
                             setBio(profile.bio)
@@ -45,7 +47,7 @@ function EditProfile(props) {
         getUserInfo(cookies.get("myToken")).then((data) => {
             setUser(data)
         })
-        updateProfile(cookies.get("myToken"), user.id, user.profile, firstName, lastName, email, phone, bio, username).catch(err => {
+        updateProfile(cookies.get("myToken"), user.id, user.profile, firstName, lastName, imageURL, email, phone, bio, username).catch(err => {
             alert('Something went wrong '+err)
         })
     }
@@ -77,6 +79,21 @@ function EditProfile(props) {
                 value={lastName}
                 onChange={e=>setLastName(e.target.value)}
             />
+                        <label htmlFor={"imageURL"} className={"form-label"}>Image URL</label>
+            <input
+                type={"text"}
+                className={"form-control"}
+                id={"imageURL"}
+                placeholder={"Image URL"}
+                value={imageURL}
+                onChange={e=>setImageURL(e.target.value)}
+            />
+
+            <p>Preview
+                                        <img className={'img img-thumbnail rounded mx-auto d-block profilePic'} src={imageURL} />
+
+            </p>
+
             <label htmlFor={"email"} className={"form-label"}>Email</label>
             <input
                 type={"email"}

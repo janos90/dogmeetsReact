@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useLocation} from "react-router-dom";
 import {Cookies} from "react-cookie";
 import {getTheDog, getUserInfo} from "../../Functions";
+import ProfileTile from "../Users/ProfileTile";
 
 
 function ActivityDetail(props) {
@@ -61,12 +62,7 @@ function ActivityDetail(props) {
                 <p>{birthday}</p>
                 <p>{owner.username}</p>
             </div>
-            <div className={'owner-details'}>
-                <h1>Owner Detail</h1>
-                <h2>{owner.first_name} {owner.last_name}</h2>
-                <p>{owner.profile.bio}</p>
-                <p>{owner.profile.phone}</p>
-            </div>
+            <ProfileTile owner={owner.id} />
         </div>
     );
 }

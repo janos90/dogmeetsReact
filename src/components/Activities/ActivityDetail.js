@@ -4,6 +4,7 @@ import {Cookies} from "react-cookie";
 import {attendEvent, disAttendEvent, getActivity, getUserInfo} from "../../Functions";
 import MapContainer from "../Extra/GoogleMap";
 import AddToMyCalender from "../Extra/AddToMyCalender";
+import ProfileTile from "../Users/ProfileTile";
 
 
 function ActivityDetail(props) {
@@ -14,6 +15,7 @@ function ActivityDetail(props) {
     const [activityLat, setActivityLat] = useState('')
     const [activityLng, setActivityLng] = useState('')
     const [activityImage, setActivityImage] = useState('')
+    const [owner, setOwner] = useState('')
 
     const [startTime, setStartTime] = useState("2018-12-06T17:00:00-05:00")
     const [endTime, setEndTime] = useState('2018-12-06T18:00:00-05:00')
@@ -46,6 +48,7 @@ function ActivityDetail(props) {
                     setActivityLng(data.lng)
                     setStartTime(new Date(data.startTime).toISOString())
                     setActivityImage(data.imageURL)
+                    setOwner(data.owner)
 
                     setDescription(data.description)
                     setParticipants(data.participants)
@@ -82,6 +85,12 @@ function ActivityDetail(props) {
             <p>{description}</p>
             <p>{participants.length}</p>
             <p>{attending ? ('You are Attending this event'):("You are Not Attending this event")}</p>
+            <p>
+                Hosted by: {owner}
+            </p>
+            <div>
+                            <ProfileTile owner={owner} />
+            </div>
             <AddToMyCalender
 
                 name={name}

@@ -43,7 +43,7 @@ export function getProfile(token, profileId){
 }
 
 
-export function updateProfile(token, userId, profileId, firstName, lastName, email, phone, bio, username, password){
+export function updateProfile(token, userId, profileId, firstName, lastName, imageURL, email, phone, bio, username){
     let url = BASE_URL + 'api/users/'+userId+'/'
     return axios.patch(url, {
         "first_name": firstName,
@@ -56,8 +56,9 @@ export function updateProfile(token, userId, profileId, firstName, lastName, ema
             let url = BASE_URL + 'api/profiles/'+profileId+'/'
             return axios.patch(url, {
                 "bio": bio,
-                // "image": image,
                 "phone": phone,
+                        "imageURL": imageURL,
+
             },{headers: {
                     'Authorization': 'Token '+token}})
                 .then(() => {
