@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Cookies} from "react-cookie";
 import {getUserInfo, addActivity} from "../../Functions";
+import GoogleMapAndLocation from "../Extra/GoogleMapAndLocation";
 
 function AddActivity(props) {
     const [allowToAdd, setAllowToAdd] = useState(false)
@@ -8,6 +9,7 @@ function AddActivity(props) {
     const [location, setLocation] = useState('')
     const [startTime, setStartTime] = useState('')
     const [description, setDescription] = useState('')
+    const [image, setImage] = useState('')
     const [lat, setLat] = useState('')
     const [lng, setLng] = useState('')
 
@@ -30,10 +32,22 @@ function AddActivity(props) {
     }, [allowToAdd])
 
     const addActivityBtn =()=>{
-       addActivity(cookies.get("myToken"), name, location, startTime, description, owner, lat, lng).catch(err => {
+       addActivity(cookies.get("myToken"), name, location, startTime, description, image, owner, lat, lng).catch(err => {
            alert("something went wrong "+ err)
        });
     }
+
+    const setMyLocation = (location) => {
+        console.log("working!", location)
+        setLocation(location)
+    }
+        const setMyLatLng = (latLng) => {
+        console.log("working!", latLng)
+            setLat(latLng.lat)
+                        setLng(latLng.lng)
+
+    }
+
 
 
 
@@ -50,17 +64,16 @@ function AddActivity(props) {
                        value={name} onChange={e => setName(e.target.value)}
                 />
             </div>
-
-            <div className="mb-3">
-                <label htmlFor={"location"} className={"form-label"}>Location</label>
-                <input type={"text"} className={"form-control"} id={"location"}
-                       value={location} onChange={e => setLocation(e.target.value)}
-                />
-            </div>
             <div className="mb-3">
                 <label htmlFor={"startTime"} className={"form-label"}>Start Time</label>
                 <input type={"datetime-local"} className={"form-control"} id={"startTime"}
                        value={startTime} onChange={e => setStartTime(e.target.value)}
+                />
+            </div>
+                    <div className="mb-3">
+                <label htmlFor={"image"} className={"form-label"}>Image URL</label>
+                <input type={"text"} className={"form-control"} id={"image"}
+                       value={image} onChange={e => setImage(e.target.value)}
                 />
             </div>
             <div className="mb-3">
@@ -69,18 +82,7 @@ function AddActivity(props) {
                        value={description} onChange={e => setDescription(e.target.value)}
                 />
             </div>
-            <div className="mb-3">
-                <label htmlFor={"lat"} className={"form-label"}>Lat</label>
-                <input type={"text"} className={"form-control"} id={"lat"}
-                       value={lat} onChange={e => setLat(e.target.value)}
-                />
-            </div>
-            <div className="mb-3">
-                <label htmlFor={"lng"} className={"form-label"}>Lng</label>
-                <input type={"text"} className={"form-control"} id={"lng"}
-                       value={lng} onChange={e => setLng(e.target.value)}
-                />
-            </div>
+            <GoogleMapAndLocation setMyLocation={setMyLocation} setMyLatLng={setMyLatLng} />
         <button className={"btn btn-primary"} onClick={addActivityBtn}>Add</button>
         </div>
             ):(<div>You are not allowed to use this page</div>)

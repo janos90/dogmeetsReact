@@ -6,6 +6,7 @@ import {Cookies} from "react-cookie";
 function ActivityTile(props) {
     const [owner, setOwner] = useState('')
 
+
     let cookies = new Cookies()
     useEffect( () => {
         async function fetchData() {
@@ -29,6 +30,7 @@ function ActivityTile(props) {
                 </Link>
             </h3>
             <div>
+                <img className={'img img-thumbnail rounded mx-auto d-block '} src={props.activity.imageURL} />
                 <table>
                     <tbody>
                     <tr>

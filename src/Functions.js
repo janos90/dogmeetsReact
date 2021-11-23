@@ -140,13 +140,14 @@ export function getActivity(activityID){
     return axios.get(url).then(response => response.data);
 }
 
-export function addActivity(token, name, location, startTime, description, owner, lat, lng){
+export function addActivity(token, name, location, startTime, description, imageURL, owner, lat, lng){
     let url = BASE_URL + 'api/activities/'
     return axios.post(url, {
         "name": name,
         "location": location,
         "startTime": startTime,
         "description": description,
+        "imageURL": imageURL,
         "owner": owner,
         "lat": lat,
         "lng": lng,
@@ -159,16 +160,14 @@ export function addActivity(token, name, location, startTime, description, owner
         .catch(err => Promise.reject('Add Post Failed!' + err));
 }
 
-export function updateActivity(token, activityID, name, location, startTime, description, owner, lat, lng){
+export function updateActivity(token, activityID, name, location, startTime, description, imageURL, lat, lng){
     let url = BASE_URL + 'api/activities/'+activityID+'/'
-    console.log(owner)
-    return axios.put(url, {
+    return axios.patch(url, {
         "name": name,
-        // "image": image,
         "location": location,
         "startTime": startTime,
         "description": description,
-        "owner": owner,
+        'imageURL': imageURL,
         "lat": lat,
         "lng": lng
     },{headers: {
@@ -229,7 +228,7 @@ export function getTheDog(dogID){
     return axios.get(url).then(response => response.data);
 }
 
-export function addDog(token, name, breed, height,weight, birthday, owner){
+export function addDog(token, name, breed, height,weight, birthday, imageURL, owner){
     let url = BASE_URL + 'api/dogs/'
     return axios.post(url, {
         "name": name,
@@ -237,9 +236,9 @@ export function addDog(token, name, breed, height,weight, birthday, owner){
         "height": height,
         "weight": weight,
         "owner": owner,
+        "imageURL": "imageURL",
 
         "birthday": birthday,
-        // "image": image,
     },{headers: {
             'Authorization': 'Token '+token}})
         .then(response => {
@@ -249,7 +248,7 @@ export function addDog(token, name, breed, height,weight, birthday, owner){
         .catch(err => Promise.reject('Add Dog Failed!'));
 }
 
-export function updateDog(token, dogID, name, breed, height,weight, birthday, image, owner){
+export function updateDog(token, dogID, name, breed, height,weight, birthday, imageURL, owner){
     let url = BASE_URL + 'api/dogs/'+dogID+'/'
     return axios.put(url, {
         "name": name,
@@ -258,7 +257,7 @@ export function updateDog(token, dogID, name, breed, height,weight, birthday, im
         "height": height,
         "weight": weight,
         "birthday": birthday,
-        "image": image,
+        "imageURL": imageURL,
         "owner": owner,
     },{headers: {
             'Authorization': 'Token '+token}})

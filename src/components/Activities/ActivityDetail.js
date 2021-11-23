@@ -3,7 +3,6 @@ import {useLocation} from "react-router-dom";
 import {Cookies} from "react-cookie";
 import {attendEvent, disAttendEvent, getActivity, getUserInfo} from "../../Functions";
 import MapContainer from "../Extra/GoogleMap";
-import AddToCalendar from "@culturehq/add-to-calendar";
 import AddToMyCalender from "../Extra/AddToMyCalender";
 
 
@@ -14,6 +13,7 @@ function ActivityDetail(props) {
     const [activityLocation, setActivityLocation] = useState('')
     const [activityLat, setActivityLat] = useState('')
     const [activityLng, setActivityLng] = useState('')
+    const [activityImage, setActivityImage] = useState('')
 
     const [startTime, setStartTime] = useState("2018-12-06T17:00:00-05:00")
     const [endTime, setEndTime] = useState('2018-12-06T18:00:00-05:00')
@@ -45,6 +45,7 @@ function ActivityDetail(props) {
                     setActivityLat(data.lat)
                     setActivityLng(data.lng)
                     setStartTime(new Date(data.startTime).toISOString())
+                    setActivityImage(data.imageURL)
 
                     setDescription(data.description)
                     setParticipants(data.participants)
@@ -75,6 +76,7 @@ function ActivityDetail(props) {
         <div>
             <h1>Activity Detail</h1>
             <h2>{name}</h2>
+            <img src={activityImage} />
             <p>{activityLocation}</p>
             <p>{startTime}</p>
             <p>{description}</p>
@@ -94,6 +96,7 @@ function ActivityDetail(props) {
                 <header>
                     <h3>Location</h3>
                 </header>
+                <p>lat={activityLat} lng={activityLng}</p>
                 <MapContainer lat={activityLat} lng={activityLng} />
 
             </div>
